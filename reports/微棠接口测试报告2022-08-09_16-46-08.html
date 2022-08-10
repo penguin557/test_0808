@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试报告</title>
+
+       <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src=" https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.1.2/echarts.min.js"></script>
+    <!--    页面样式-->
+    <style type="text/css">
+        /*标题样式*/
+        .title {
+            width: auto;
+            height: 60px;
+            text-align: center;
+            font: bolder 38px/60px "Microsoft YaHei UI";
+        }
+
+        /*汇总信息样式*/
+        .summary {
+            width: 90%;
+            position: absolute;
+            top: 120px;
+            margin-left: 5%;
+
+        }
+
+        .text-left {
+            font: bolder 20px/30px "Microsoft YaHei UI";
+        }
+
+        .left {
+            width: 50%;
+            float: left;
+
+        }
+
+        .right {
+            width: 50%;
+            float: right;
+
+        }
+
+        .desc {
+            float: left;
+            width: 100%;
+        }
+
+        .list-group-item span {
+            font: normal 16px/38px "Microsoft YaHei UI";
+            padding: 30px;
+
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: .4rem 1.25rem;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        /* 执行信息样式   */
+        .test_info {
+            width: 90%;
+            position: absolute;
+            top: 900px;
+            margin-left: 5%;
+
+            color: #28a745 !important;
+        }
+
+        .table td, th {
+            border: solid 2px rgba(9, 122, 51, 0.11) !important;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+
+        select {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 2em;
+            width: 8em;
+            margin-left: 2em;
+        }
+
+        option {
+            text-align: center;
+            height: 36px;
+            font: none 18px/36px "Microsoft YaHei UI";
+            color: #28a745 !important;
+        }
+
+        .test_log {
+            background: rgba(163, 171, 189, 0.15);
+            width: 100%;
+            height: 50px;
+            border-top: none;
+            border-bottom: none;
+            display: none;
+            text-align: left;
+        }
+
+        .test_log td {
+            text-align: left;
+            height: 30px;
+            margin: 0;
+            padding-left: 3em;
+            padding-right:3em;
+            font: none 18px/24px "Microsoft YaHei UI";
+            color: #9e141a;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            line-height: 22px;
+            font-size: 14px
+        }
+
+        /*    测试图表显示*/
+        .char {
+            width: 90%;
+            position: absolute;
+            top: 450px;
+            margin-left: 5%;
+            color: #28a745 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--报告标题-->
+<div class="title text-success">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">测试报告</div>
+</div>
+
+<!--汇总信息-->
+<div class="summary">
+    <p class="text-left text-success">测试结果汇总</p>
+    <div class="left">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">测试人员</button>
+                <span class="text-dark">郑鹏</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">开始时间</button>
+                <span class="text-dark">2022-08-09 16:46:08</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">执行时间</button>
+                <span class="text-dark">0.81 S</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">用例总数</button>
+                <span class="text-dark">10</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="right">
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">成功用例</button>
+                <span class="text-success">10</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning">失败用例</button>
+                <span class="text-warning">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger">错误用例</button>
+                <span class="text-danger">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-secondary">跳过用例</button>
+                <span class="text-secondary">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="desc">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">描述信息</button>
+                <span class="text-secondary">微棠接口测试报告</span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<!--测试图表-->
+<div class="char">
+    <p class="text-left text-success">图表展示</p>
+    <div id="char2" style="width: 49%;height: 400px;float: left"></div>
+    <div id="char" style="width: 49%;height: 400px ;float: left"></div>
+</div>
+
+<!--详细信息-->
+<div class="test_info">
+
+    <p class="text-left text-success">详细信息</p>
+    <div class="table_data">
+
+        <table class="table">
+            <thead class="bg-success text-light">
+            <tr>
+                <th scope="col" style="width: 5%;padding: 0">编号</th>
+                <th scope="col" style="width: 20%;padding: 0">
+                    <span>测试类</span>
+                    <select id="testClass">
+                        <option>所有</option>
+                        
+                            <option>Web_sjkb_all</option>
+                        
+                    </select>
+
+                </th>
+
+                <th scope="col" style="width: 15%;padding: 0">测试方法</th>
+                <th scope="col" style="width: 20%;padding: 0">用例描述</th>
+                <th scope="col" style="width: 15%;padding: 0">执行时间</th>
+                <th scope="col" style="width: 20%;padding: 0">
+
+                    <span>执行结果</span>
+                    <select id="testResult">
+                        <option>所有</option>
+                        <option class="text-success">成功</option>
+                        <option class="text-warning">失败</option>
+                        <option class="text-danger">错误</option>
+                        <option class="text-info">跳过</option>
+                    </select>
+
+                </th>
+                <th scope="col" style="width: 10%;padding: 0">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>1</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_001</td>
+                    <td>通知公告列表list</td>
+                    <td>0.193s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '列表查询成功', 'data': {'code': '200', 'success': True, 'key': None, 'message': '列表查询成功', 'extend': {}, 'total': 321, 'rows': [{'primaryKey': '826ba1d12d514d9bab0fdeadb0495c82', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660034726000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660034726000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '940cca34baa040edb6c7c400dd3d2255', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660034112000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660034112000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '71d81a3098a042ccb75d34fcab5f5f5f', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660030511000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660030511000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': 'ed5fbfd17e614037a92add453621c652', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660028275000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660028275000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '8b547c5399034191a52e4a9239f86009', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660025818000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660025818000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '9c5c10178b64436f896b5a00f7a13ab4', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660018741000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660018741000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '9d838dd31d22404cb66292590aba6c44', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660017256000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660017256000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '2f172b599456468592529170e2972d03', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660015950000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660015950000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '04cf822e236d4882ba27940bc6e1f392', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660015833000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660015833000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}, {'primaryKey': '7236ff1a2114433d90103a7ee6af8fb1', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'categoryName': '通知', 'templateId': '2ed69f420b22476a93440ac38648917d', 'title': '核酸公告模板', 'content': '<p>13123113</p>', 'type': 'notice', 'userOriented': '123123', 'userOrientedName': None, 'summary': '', 'beginTime': None, 'endTime': None, 'publishTime': None, 'coverUrl': None, 'isComment': None, 'isShare': None, 'isMustRead': None, 'mustReadTime': None, 'isAddWatermark': None, 'watermarkContent': None, 'isNeedReview': None, 'sendType': 'immediate', 'sendTime': None, 'sendChannel': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'sendChannelName': '微棠APP', 'channelType': 'START_PAGE', 'channelTypeName': '启动页', 'grade': None, 'variableParams': None, 'msgId': None, 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1660015353000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1660015353000, 'status': 2, 'pageUrl': '', 'pageType': 3, 'pageTableType': None, 'pageTableId': 'B80FB20EDD6034980F492C12D0E20744'}]}, 'bundle': None}
+test_web_sjkb_001 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>2</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_002</td>
+                    <td>通知类别tree</td>
+                    <td>0.0411s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '查询成功', 'data': {'code': '200', 'success': True, 'key': None, 'message': '查询成功', 'extend': {}, 'total': 0, 'rows': [{'primaryKey': '82597df10f9e43498a0602812008d83b', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '根节点', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '0', 'catelogPath': '82597df10f9e43498a0602812008d83b', 'level': 1, 'child': [{'primaryKey': '259141bbef0c41058be2f1760f7827a6', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '通知', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '82597df10f9e43498a0602812008d83b', 'catelogPath': '82597df10f9e43498a0602812008d83b|259141bbef0c41058be2f1760f7827a6', 'level': 2, 'child': [{'primaryKey': '9cfedbc8f34a4a24ae22a23cdc2db63b', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '停水停电', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '259141bbef0c41058be2f1760f7827a6', 'catelogPath': '82597df10f9e43498a0602812008d83b|259141bbef0c41058be2f1760f7827a6|9cfedbc8f34a4a24ae22a23cdc2db63b', 'level': 3, 'child': [], 'status': 1, 'createUser': '3330df0feb6647f19830a911d10db665', 'createTime': 1643094544000, 'updateUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'updateTime': 1653979723000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '58c32c7010e942fdb001e6f7c0b6863b', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '断网', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '259141bbef0c41058be2f1760f7827a6', 'catelogPath': '82597df10f9e43498a0602812008d83b|259141bbef0c41058be2f1760f7827a6|58c32c7010e942fdb001e6f7c0b6863b', 'level': 3, 'child': [], 'status': 1, 'createUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'createTime': 1648457118000, 'updateUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'updateTime': 1653979729000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '0ad6bda06977427fb953cdb34f72322c', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '核酸', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '259141bbef0c41058be2f1760f7827a6', 'catelogPath': '82597df10f9e43498a0602812008d83b|259141bbef0c41058be2f1760f7827a6|0ad6bda06977427fb953cdb34f72322c', 'level': 3, 'child': [], 'status': 1, 'createUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'createTime': 1653984614000, 'updateUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'updateTime': 1653984614000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}], 'status': 1, 'createUser': '3330df0feb6647f19830a911d10db665', 'createTime': 1643094528000, 'updateUser': '3330df0feb6647f19830a911d10db665', 'updateTime': 1643094528000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '901f5336a7db4eb5a71141d81ff375c3', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '公告', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '82597df10f9e43498a0602812008d83b', 'catelogPath': '82597df10f9e43498a0602812008d83b|901f5336a7db4eb5a71141d81ff375c3', 'level': 2, 'child': [{'primaryKey': 'ed8d58a67d564278a1a2d17870907ce2', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '升级维护', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '901f5336a7db4eb5a71141d81ff375c3', 'catelogPath': '82597df10f9e43498a0602812008d83b|901f5336a7db4eb5a71141d81ff375c3|ed8d58a67d564278a1a2d17870907ce2', 'level': 3, 'child': [], 'status': 1, 'createUser': '72e9d5d49c4146ebbb26d87fe3004799', 'createTime': 1647498649000, 'updateUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'updateTime': 1653979745000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}], 'status': 1, 'createUser': '72e9d5d49c4146ebbb26d87fe3004799', 'createTime': 1647498645000, 'updateUser': '7fa1b6706d9c4369b28031a6fd4cc9f7', 'updateTime': 1653979737000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '15dfe7870b5a4358bdf7820d92e2ecda', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '活动消息', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '82597df10f9e43498a0602812008d83b', 'catelogPath': '82597df10f9e43498a0602812008d83b|15dfe7870b5a4358bdf7820d92e2ecda', 'level': 2, 'child': [{'primaryKey': 'e7b0f6b2b0c143aa95caed17fbe2b3c5', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '运营活动', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '15dfe7870b5a4358bdf7820d92e2ecda', 'catelogPath': '82597df10f9e43498a0602812008d83b|15dfe7870b5a4358bdf7820d92e2ecda|e7b0f6b2b0c143aa95caed17fbe2b3c5', 'level': 3, 'child': [], 'status': 1, 'createUser': 'e6058edf0e81435fb692ba13be1091fe', 'createTime': 1655706402000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734507000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '785947f3879a4c5ca017c82579608bdc', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '商业活动', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '15dfe7870b5a4358bdf7820d92e2ecda', 'catelogPath': '82597df10f9e43498a0602812008d83b|15dfe7870b5a4358bdf7820d92e2ecda|785947f3879a4c5ca017c82579608bdc', 'level': 3, 'child': [], 'status': 1, 'createUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'createTime': 1658734510000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734510000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': 'e40911525d1642b1883f2b84f93a8299', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '社团活动', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '15dfe7870b5a4358bdf7820d92e2ecda', 'catelogPath': '82597df10f9e43498a0602812008d83b|15dfe7870b5a4358bdf7820d92e2ecda|e40911525d1642b1883f2b84f93a8299', 'level': 3, 'child': [], 'status': 1, 'createUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'createTime': 1658734548000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734548000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': 'bfe45fe4071640bfa6530a27a9bf1788', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '体育活动', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '15dfe7870b5a4358bdf7820d92e2ecda', 'catelogPath': '82597df10f9e43498a0602812008d83b|15dfe7870b5a4358bdf7820d92e2ecda|bfe45fe4071640bfa6530a27a9bf1788', 'level': 3, 'child': [], 'status': 1, 'createUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'createTime': 1658734552000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734552000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}], 'status': 1, 'createUser': 'e6058edf0e81435fb692ba13be1091fe', 'createTime': 1655706383000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734501000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}, {'primaryKey': '92997bc9c2334b288242f0c089248d3e', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '测试', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '82597df10f9e43498a0602812008d83b', 'catelogPath': '82597df10f9e43498a0602812008d83b|92997bc9c2334b288242f0c089248d3e', 'level': 2, 'child': [{'primaryKey': '3132eb6e4b1844aa86b9c4d7cc09c528', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'catalogName': '测试1', 'catalogType': None, 'iconUrl': None, 'sortNo': None, 'parentId': '92997bc9c2334b288242f0c089248d3e', 'catelogPath': '82597df10f9e43498a0602812008d83b|92997bc9c2334b288242f0c089248d3e|3132eb6e4b1844aa86b9c4d7cc09c528', 'level': 3, 'child': [], 'status': 1, 'createUser': '72e9d5d49c4146ebbb26d87fe3004799', 'createTime': 1658746208000, 'updateUser': '72e9d5d49c4146ebbb26d87fe3004799', 'updateTime': 1658746208000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}], 'status': 1, 'createUser': '72e9d5d49c4146ebbb26d87fe3004799', 'createTime': 1658746205000, 'updateUser': '72e9d5d49c4146ebbb26d87fe3004799', 'updateTime': 1658746205000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}], 'status': 1, 'createUser': '3330df0feb6647f19830a911d10db665', 'createTime': 1643094528000, 'updateUser': '3330df0feb6647f19830a911d10db665', 'updateTime': 1643094528000, 'description': '', 'backgroundColor': None, 'aliasName': None, 'catalogCode': None, 'isUsed': False, 'categoryAliasName': None}]}, 'bundle': None}
+test_web_sjkb_002 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>3</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_003</td>
+                    <td>通知渠道list</td>
+                    <td>0.0329s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '0032004', 'message': '查询成功', 'data': {'code': '0032004', 'success': True, 'key': None, 'message': '查询成功', 'extend': {}, 'total': 3, 'rows': [{'primaryKey': 'eb988ea0dae8465cb182976eee07b9f6', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'channelType': 'WECHAT_MP', 'channelName': '微棠小程序', 'channelStatus': 1, 'callbackUrl': '', 'createUser': 'e6058edf0e81435fb692ba13be1091fe', 'createTime': 1655965473000, 'updateUser': 'e6058edf0e81435fb692ba13be1091fe', 'updateTime': 1655965474000, 'status': 1, 'channelCode': ''}, {'primaryKey': '74883b32a67e4037819d1f0ebf908b9e', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'tenant_notice_category', 'channelType': 'APP_ADMIN', 'channelName': '微棠管理端', 'channelStatus': 1, 'callbackUrl': '', 'createUser': 'e6058edf0e81435fb692ba13be1091fe', 'createTime': 1655965454000, 'updateUser': 'e6058edf0e81435fb692ba13be1091fe', 'updateTime': 1655965461000, 'status': 1, 'channelCode': ''}, {'primaryKey': '7d9965acd15f4dc8bb52c1fcfcf633f6', 'bizId': None, 'bizType': 'tenant_notice_category', 'channelType': 'APP', 'channelName': '微棠APP', 'channelStatus': 1, 'callbackUrl': '', 'createUser': '0023853cc7804b8288dc5f32e4962d18', 'createTime': 1642696547000, 'updateUser': '0023853cc7804b8288dc5f32e4962d18', 'updateTime': 1642706680000, 'status': 1, 'channelCode': ''}]}, 'bundle': None}
+test_web_sjkb_003 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>4</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_004</td>
+                    <td>/server-api/v1/constant</td>
+                    <td>0.107s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '操作成功', 'data': {'shopRentContractStatus': [{'key': 0, 'value': '已删除'}, {'key': 1, 'value': '草稿'}, {'key': 2, 'value': '签约中'}, {'key': 3, 'value': '已作废'}, {'key': 4, 'value': '已过期'}], 'orderType': [{'key': 1, 'value': '户内维修订单'}, {'key': 2, 'value': '入住保洁订单'}, {'key': 3, 'value': '住户投诉订单'}, {'key': 4, 'value': '非住户投诉订单'}, {'key': 5, 'value': '空房维修订单'}, {'key': 6, 'value': '公区维修订单'}, {'key': 7, 'value': '空房保洁订单'}, {'key': 8, 'value': '公区保洁订单'}, {'key': 9, 'value': '增值保洁订单'}], 'rentActivityChannel': [{'key': 'app', 'value': 'APP'}], 'bannerType': [{'key': 'start_up', 'value': '启动页'}, {'key': 'default_start_up', 'value': '默认启动页'}, {'key': 'open_lock', 'value': '开锁页'}, {'key': 'default_open_lock', 'value': '默认开锁页'}, {'key': 'banner', 'value': 'Banner'}], 'positionType': [{'key': 'guanjia', 'value': '管家'}, {'key': 'zhuguan', 'value': '主管'}, {'key': 'space_auth_all', 'value': '全部权限'}, {'key': 'all_data', 'value': '全部数据权限'}, {'key': 'zongjian', 'value': '总监'}, {'key': 'jingli', 'value': '经理'}, {'key': '1121123', 'value': '测试'}], 'vtAssociationJoinType': [{'key': 0, 'value': '不限'}, {'key': 1, 'value': '审核加入'}, {'key': 2, 'value': '认证用户'}, {'key': 3, 'value': '认证住户'}], 'chargeBackMode': [{'key': '0', 'value': '不支持'}, {'key': '1', 'value': '支持'}], 'ownerSelfUseStatus': [{'key': 2, 'value': '欠费'}], 'withdrawalStatus': [{'key': 1, 'value': '申请中'}, {'key': 2, 'value': '已受理'}, {'key': 3, 'value': '已取消'}, {'key': 4, 'value': '退租确认中'}, {'key': 5, 'value': '已完成'}], 'dormBillPayType': [{'key': 1, 'value': '对公打款'}, {'key': 2, 'value': '余额抵扣'}], 'couponOwnership': [{'key': 0, 'value': '老用户'}, {'key': 1, 'value': '新用户'}], 'projectSpaceType': [{'key': 'community', 'value': '小区'}, {'key': 'group', 'value': '分组'}], 'bannerStatus': [{'key': 0, 'value': '删除'}, {'key': 1, 'value': '发布'}, {'key': 2, 'value': '撤销'}], 'activityStatus': [{'key': 1, 'value': '草稿'}, {'key': 2, 'value': '已发布'}, {'key': 3, 'value': '进行中'}, {'key': 4, 'value': '已结束'}, {'key': 5, 'value': '已撤销'}], 'dormContractPaymentMethod': [{'key': 1, 'value': '预付'}, {'key': 2, 'value': '后付'}], 'rtappMenuJumpType': [{'key': '1', 'value': '原生-底部'}, {'key': '2', 'value': '原生内部跳转'}, {'key': '3', 'value': 'H5内部跳转'}, {'key': '4', 'value': 'H5外部链接'}], 'manualCouponPcScene': [{'key': '301', 'value': '主观-减免退租违约金'}, {'key': '302', 'value': '客观-减免退租违约金不超50%月租金'}, {'key': '303', 'value': '客观-减免退租违约金超50%月租金'}, {'key': '304', 'value': '主观-减免换租违约金'}, {'key': '305', 'value': '客观-减免换租违约金'}, {'key': '306', 'value': '客诉赔偿'}], 'manageSelfUseStatus': [{'key': 1, 'value': '待退'}, {'key': 2, 'value': '欠费'}], 'taskStatus': [{'key': 1, 'value': '草稿'}, {'key': 2, 'value': '待派单'}, {'key': 3, 'value': '关闭'}, {'key': 4, 'value': '撤销'}, {'key': 5, 'value': '已被抢'}, {'key': 6, 'value': '待接单'}, {'key': 7, 'value': '已接单'}, {'key': 8, 'value': '已拒绝'}, {'key': 9, 'value': '处理中'}, {'key': 10, 'value': '已完成'}, {'key': 15, 'value': '待超时'}, {'key': 16, 'value': '可接单人选全部拒绝'}, {'key': 17, 'value': '待处理'}, {'key': 18, 'value': '已被派'}, {'key': 19, 'value': '已派单'}, {'key': 20, 'value': '已退单'}, {'key': 21, 'value': '延时申请审批中'}], 'maximumLeaseTerm': [{'key': 1, 'value': '1个月'}, {'key': 2, 'value': '2个月'}, {'key': 3, 'value': '3个月'}, {'key': 4, 'value': '4个月'}, {'key': 5, 'value': '5个月'}, {'key': 6, 'value': '6个月'}, {'key': 7, 'value': '7个月'}, {'key': 8, 'value': '8个月'}, {'key': 9, 'value': '9个月'}, {'key': 10, 'value': '10个月'}, {'key': 11, 'value': '11个月'}, {'key': 12, 'value': '12个月'}], 'dormContractStaffInformType': [{'key': 1, 'value': '线下认证'}, {'key': 2, 'value': '接口认证'}], 'shopRentContractPayCycle': [{'key': 1, 'value': '1个月'}, {'key': 3, 'value': '3个月'}], 'vtAssociationUserStatusOfQuery': [{'key': 1, 'value': '待审核'}, {'key': 2, 'value': '已通过'}], 'feeType': [{'key': 1, 'value': '租金'}, {'key': 2, 'value': '押金'}, {'key': 3, 'value': '服务费'}, {'key': 4, 'value': '网络费'}, {'key': 5, 'value': '物业费'}, {'key': 6, 'value': '水费'}, {'key': 7, 'value': '电费'}, {'key': 8, 'value': '燃气费'}, {'key': 9, 'value': '热水费'}, {'key': 10, 'value': '折扣费用'}, {'key': 11, 'value': '管理费'}, {'key': 12, 'value': '滞纳金'}, {'key': 13, 'value': '维修'}, {'key': 14, 'value': '增值配置'}, {'key': 15, 'value': '物业、生活费'}], 'pageCode': [{'key': 'start', 'value': '启动页广告'}, {'key': 'house', 'value': '首页Banner'}, {'key': 'life', 'value': '生活Banner'}, {'key': 'community', 'value': '社区Banner'}, {'key': 'me', 'value': '我的Banner'}, {'key': 'open', 'value': '开锁页广告'}, {'key': 'applet', 'value': '小程序首页Banner'}], 'vtCheckinType': [{'key': 0, 'value': '临时住户'}, {'key': 2, 'value': '企业住户'}, {'key': 3, 'value': '同住人'}, {'key': 4, 'value': '内部员工'}], 'vtComplaintType': [{'key': 0, 'value': '邻里纠纷'}, {'key': 1, 'value': '维修服务'}, {'key': 2, 'value': '房屋质量'}, {'key': 3, 'value': '客服服务'}, {'key': 4, 'value': '保洁服务'}, {'key': 5, 'value': '财务打款'}, {'key': 6, 'value': '其他分类'}], 'couponApplyTo': [{'key': '1', 'value': '租金'}, {'key': '3', 'value': '服务费'}, {'key': '44', 'value': '换租违约金'}, {'key': '55', 'value': '退租违约金'}], 'manualCouponStatus': [{'key': 1, 'value': '待审核'}, {'key': 2, 'value': '审核中'}, {'key': 3, 'value': '已发放'}, {'key': 4, 'value': '已驳回'}], 'vtApplyReason': [{'key': 0, 'value': '集团员工入住'}, {'key': 1, 'value': '企业租户入住'}, {'key': 2, 'value': '临时免费入住'}, {'key': 3, 'value': '过渡付费入住'}], 'applicableFormats': [{'key': 1, 'value': '公寓'}, {'key': 2, 'value': '增值服务'}], 'dormAccountRecordType': [{'key': 1, 'value': '支出'}, {'key': 2, 'value': '收入'}], 'dormBillStatus': [{'key': 10, 'value': '待收费'}, {'key': 41, 'value': '已收费'}, {'key': 40, 'value': '已作废'}], 'damage': [{'key': 1, 'value': '维修'}, {'key': 2, 'value': '清洁'}], 'dormBillType': [{'key': 1, 'value': '租金'}, {'key': 2, 'value': '押金'}, {'key': 3, 'value': '服务费'}, {'key': 4, 'value': '网络费'}, {'key': 6, 'value': '水费'}, {'key': 7, 'value': '电费'}], 'residentSource': [{'key': 1, 'value': '个人住户'}, {'key': 2, 'value': '企业住户'}, {'key': 3, 'value': '业主住户'}], 'bannerCode': [{'key': 'start', 'value': '启动页广告'}, {'key': 'house', 'value': '首页Banner'}, {'key': 'life', 'value': '生活Banner'}, {'key': 'community', 'value': '社区Banner'}, {'key': 'me', 'value': '我的Banner'}, {'key': 'open', 'value': '开锁页广告'}, {'key': 'applet', 'value': '小程序首页Banner'}], 'manualCouponClientType': [{'key': 1, 'value': '潜在客户'}, {'key': 2, 'value': '流失客户'}, {'key': 3, 'value': '个人-签约人'}, {'key': 4, 'value': '个人-同住人'}], 'rentActivityDiscountFeeType': [{'key': 1, 'value': '立减'}, {'key': 2, 'value': '折扣'}], 'rentActivityDepositMonthType': [{'key': 0, 'value': '0月'}, {'key': 1, 'value': '1月'}, {'key': 2, 'value': '2月'}, {'key': 3, 'value': '3月'}], 'gender': [{'key': 0, 'value': '未知'}, {'key': 1, 'value': '男'}, {'key': 2, 'value': '女'}], 'apartmentFormatStatusType301': [{'key': 1, 'value': '个人入住'}, {'key': 2, 'value': '企业入住'}, {'key': 3, 'value': '临时房'}, {'key': 4, 'value': '样板房'}, {'key': 14, 'value': '维修房'}, {'key': 15, 'value': '检测房'}], 'shopMallSell': [{'key': 'sell_1', 'value': '餐饮'}, {'key': 'sell_2', 'value': '轻餐饮'}, {'key': 'sell_3', 'value': '零售'}, {'key': 'sell_4', 'value': '配套'}, {'key': 'sell_5', 'value': '仓库'}], 'projectThemeStatus': [{'key': 0, 'value': '删除'}, {'key': 1, 'value': '草稿'}, {'key': 2, 'value': '上架'}, {'key': 3, 'value': '下架'}], 'rentType': [{'key': 'new', 'value': '新租'}, {'key': 'renew', 'value': '续租'}, {'key': 'change', 'value': '换租'}, {'key': 'change_renew', 'value': '换房续租'}], 'indexSpaceType': [{'key': 36, 'value': '街道'}, {'key': 24, 'value': '小区'}, {'key': 25, 'value': '楼栋'}, {'key': 63, 'value': '组团'}, {'key': 80, 'value': '宿舍房间'}, {'key': 32, 'value': '宿舍床位'}, {'key': 924, 'value': '业务小区'}, {'key': 963, 'value': '业务区域'}], 'vtAssociationUserStatus': [{'key': 0, 'value': '移除'}, {'key': 1, 'value': '待审核'}, {'key': 2, 'value': '已通过'}, {'key': 3, 'value': '已拒绝'}], 'appletIsDisplayed': [{'key': 0, 'value': '下架'}, {'key': 1, 'value': '上架'}], 'manageFlowPathState': [{'key': 1, 'value': '空闲可租'}, {'key': 2, 'value': '已预订'}, {'key': 3, 'value': '签约待入住'}, {'key': 4, 'value': '已入住'}, {'key': 5, 'value': '逾期未退'}, {'key': 7, 'value': '退租配置中'}, {'key': 8, 'value': '挂起'}, {'key': 9, 'value': '未开业'}], 'authorizeType': [{'key': '1', 'value': '角色'}, {'key': '2', 'value': '人员'}, {'key': '3', 'value': '项目'}], 'longTerm': [{'key': 1, 'value': '1个月'}, {'key': 3, 'value': '3个月'}, {'key': 6, 'value': '6个月'}, {'key': 12, 'value': '12个月'}], 'complaintStatus': [{'key': 1, 'value': '未受理'}, {'key': 2, 'value': '受理中'}, {'key': 3, 'value': '已完成'}], 'tagType': [{'key': 'spacetag', 'value': '空间标签'}, {'key': 'rent-goods', 'value': '房源标签'}, {'key': 'houseTypePicture', 'value': '户型图片标签'}, {'key': '93EB2B9058D1B49973D88A8E0EBA17A2', 'value': '房源特点'}, {'key': '3B341149C616BAC469D6526A6E703795', 'value': '房源照片'}, {'key': 'F8F29EBF768411EB9B7A00163E08DDF3', 'value': '退租原因(内部人员用)'}, {'key': 'CC640E85666A460E1F381BF4AAF4FB2D', 'value': '退租原因'}, {'key': 'DEDD8164B08CFF69CC6A3EC3FECD4E38', 'value': '临时换房原因'}, {'key': 'F165B84BCC908B38CD825C53CE5FE98C', 'value': '入住评价标签'}, {'key': '7441E3A188D3351A35FC566E715B6143', 'value': '商机渠道'}, {'key': 'D3FC26F8FEC3D98E66F35544CF5E4992', 'value': '商机来源'}, {'key': '8412BA50CC595C70572ED4066E763D4C', 'value': '商机年龄'}, {'key': 'FA99AA0B879C5D5FD70CE36FD11DD1E5', 'value': '商机客户行业'}, {'key': 'DF5DEC3EAAC62B49E7802ABA7449254A', 'value': '商机客户职业'}, {'key': '45173DF5B64FD6F2D6F64ACCB1F3A9B5', 'value': '商机客户爱好'}, {'key': '66807939382798CD7F19A0449185B6AE', 'value': '商机客户意向'}, {'key': '4963CFA78894A54FB13F2D9A43DD8730', 'value': '商机预算'}, {'key': '0C6407D7F4A4AB3EE4420287C635D77D', 'value': '商机客户意向户型'}, {'key': '13A230938787D7750B21BDB1CFA10191', 'value': '商机关闭原因'}, {'key': '7A1A0DEB033297C02E27D8F8E0E2FDF1', 'value': '未签约原因'}, {'key': '7EC41A75FD4D154FF7819373A8E1CD86', 'value': '维修完成标签'}, {'key': '89124B922206DE70BFA023F94167CCCF', 'value': '维修未完成标签'}, {'key': '89124B92229UOB70BFA023F949966CCF', 'value': '用户画像标签'}, {'key': '89124B96207YUB70BFA023F949966CCF', 'value': '用户违规记录标签'}, {'key': 'OODNJY578FBA629F7D7880F035C10820', 'value': '保洁完成标签'}, {'key': '66YENH578FBA629F7D7880F035C10820', 'value': '保洁未完成标签'}, {'key': '1CCAEBF2D687A31D40B21706C60D4D91', 'value': '用户地址选项'}, {'key': 'E8E5738E1DE96995CE161DDE56A67CB3', 'value': '感兴趣的话题库'}, {'key': 'rent-commodity', 'value': '商品标签'}, {'key': 'product_house_style', 'value': '格局产品标签'}, {'key': 'product_house_type', 'value': '户型产品标签'}, {'key': 'enterprise_return_reason', 'value': '企业退租原因标签'}, {'key': 'lease_renewal_follow', 'value': '客户续租跟进标签'}, {'key': 'tag_type_subway_line', 'value': '地铁线路'}, {'key': 'tag_type_cell', 'value': '小区配套设施'}, {'key': 'tag_type_asset_tag_mapping', 'value': '资产映射标签'}], 'usageType': [{'key': '1', 'value': '个人入住'}, {'key': '2', 'value': '企业入住'}, {'key': '3', 'value': '临时入住'}, {'key': '4', 'value': '样板间'}, {'key': '5', 'value': '业主入住'}, {'key': '6', 'value': '自用'}, {'key': '7', 'value': '管理用房'}, {'key': '8', 'value': '其他'}], 'supportDraft': [{'key': '0', 'value': '不支持'}, {'key': '1', 'value': '支持'}], 'storeType': [{'key': '1', 'value': '实体'}, {'key': '2', 'value': '虚拟'}], 'leaseFollowStatus': [{'key': '0', 'value': '高意向'}, {'key': '1', 'value': '意向一般'}, {'key': '2', 'value': '低意向'}, {'key': '3', 'value': '特殊情况'}, {'key': '4', 'value': '联系不上/不回复'}, {'key': '5', 'value': '明确不续'}], 'flowPathState': [{'key': 1, 'value': '未开业'}, {'key': 2, 'value': '空置房'}, {'key': 3, 'value': '已预订'}, {'key': 4, 'value': '已签约'}, {'key': 5, 'value': '已入住'}, {'key': 6, 'value': '已挂起'}], 'vtActivityJoinType': [{'key': 0, 'value': '不限'}, {'key': 1, 'value': '认证用户'}, {'key': 2, 'value': '认证住户'}, {'key': 3, 'value': '本社团人员'}], 'dormContractReturnStatus': [{'key': 1, 'value': '费用确认中'}, {'key': 2, 'value': '已确认'}], 'channelSourceComplaint': [{'key': 4, 'value': '400电话投诉'}, {'key': 5, 'value': '客户APP投诉'}, {'key': 6, 'value': '客户前台投诉'}, {'key': 7, 'value': '销售/小棠/物业等服务中心内部工作人员反馈'}, {'key': 8, 'value': '签约入住评价'}, {'key': 9, 'value': '中台各业务口反馈'}, {'key': 10, 'value': '客户调研反馈'}, {'key': 11, 'value': '拓展/公共关系/建设/财务等跨部门工作人员反馈'}, {'key': 12, 'value': '网格、街道办、派出所、消协、市监局等政府监管部门'}, {'key': 13, 'value': '微博、抖音、小红书、百度、豆瓣、闲鱼、知乎、西瓜视频等外网'}], 'bannerState': [{'key': 1, 'value': '草稿'}, {'key': 2, 'value': '上架'}, {'key': 3, 'value': '下架'}, {'key': 0, 'value': '删除'}], 'opportunityClientSex': [{'key': 1, 'value': '男'}, {'key': 0, 'value': '女'}, {'key': 2, 'value': '未知'}], 'acceptanceStatus': [{'key': 0, 'value': '待验收'}, {'key': 2, 'value': '验收中'}, {'key': 1, 'value': '已验收'}], 'shopOthers': [{'key': 0, 'value': '禁售'}, {'key': 1, 'value': '欠费'}], 'rentStatus': [{'key': 10, 'value': '待确认条款'}, {'key': 11, 'value': '待支付'}, {'key': 12, 'value': '已取消'}, {'key': 13, 'value': '已支付待签署'}, {'key': 14, 'value': '支付已超时'}, {'key': 16, 'value': '已完成'}, {'key': 17, 'value': '解约中'}, {'key': 15, 'value': '已解约'}, {'key': 18, 'value': '已到期'}, {'key': 19, 'value': '待解约'}, {'key': 20, 'value': '换租受理中'}, {'key': 21, 'value': '无责换租已通过'}], 'manualCouponZqScene': [{'key': '201', 'value': '活动奖励'}, {'key': '202', 'value': '回访奖励'}, {'key': '203', 'value': '服务承诺-3天无责换房'}], 'taskTemplatAppAdvertConstanteStatus': [{'key': 0, 'value': '已删除'}, {'key': 1, 'value': '草稿'}, {'key': 2, 'value': '上架'}, {'key': 3, 'value': '下架'}], 'rentActivityDiscountMonthType': [{'key': 1, 'value': '1月'}, {'key': 3, 'value': '3月'}, {'key': 6, 'value': '6月'}, {'key': 12, 'value': '12月'}], 'climbState': [{'key': 0, 'value': '否'}, {'key': 1, 'value': '是'}], 'orderSourceType': [{'key': 3, 'value': '客服中心'}, {'key': 5, 'value': '微棠APP'}, {'key': 20, 'value': '微棠业主APP'}, {'key': 21, 'value': '微棠商户APP'}, {'key': 22, 'value': '微棠企业APP'}], 'couponUseType': [{'key': 2, 'value': '促销'}, {'key': 3, 'value': '赠券'}, {'key': 4, 'value': '赔偿'}, {'key': 5, 'value': '权益券'}], 'meterType': [{'key': 1402, 'value': '水表'}, {'key': 1502, 'value': '电表'}, {'key': 1602, 'value': '热水表'}, {'key': 1702, 'value': '燃气表'}], 'apartmentFormatStatusType302': [{'key': 10, 'value': '办公室'}, {'key': 11, 'value': '仓库'}, {'key': 12, 'value': '展厅'}, {'key': 13, 'value': '消控室'}], 'dormContractStaffCertType': [{'key': 1, 'value': '现场提供证明'}, {'key': 2, 'value': '企业邮件提前告知'}], 'laodaixinChannel': [{'key': 'banner_house', 'value': '首页banner'}, {'key': 'banner_life', 'value': '生活banner'}, {'key': 'banner_community', 'value': '社区banner'}, {'key': 'channel_my-activity', 'value': '我的活动'}], 'rentFollowStatus': [{'key': '0', 'value': '高意向'}, {'key': '1', 'value': '意向一般'}, {'key': '2', 'value': '低意向'}, {'key': '3', 'value': '特殊情况'}, {'key': '4', 'value': '联系不上/不回复'}, {'key': '5', 'value': '明确不续'}], 'apartmentFormatStatusType': [{'key': 301, 'value': '公寓房间'}, {'key': 302, 'value': '管理用房'}, {'key': 303, 'value': '业主自住'}], 'wordsCleaningUseType': [{'key': '1', 'value': '保洁原因'}, {'key': '2', 'value': '保洁内容'}], 'operationState': [{'key': 0, 'value': '未运营'}, {'key': 1, 'value': '运营中'}], 'themeAreaPictureType': [{'key': 1, 'value': '大封面'}, {'key': 2, 'value': '小封面'}, {'key': 3, 'value': '相册'}], 'credentialsType': [{'key': 'FMS', 'value': '表单'}], 'couponPublishDemand': [{'key': 1, 'value': '可超额领券同时提示'}, {'key': 2, 'value': '不可超额领券'}], 'dormContractPartnerMode': [{'value': '签署合同-指定房间', 'key': 5}, {'value': '签署合同-安居补贴', 'key': 6}], 'taskSource': [{'key': '1', 'value': '运营管理（移动端）'}, {'key': '2', 'value': '运营管理（网页端）'}, {'key': '3', 'value': '客服中心'}, {'key': '4', 'value': '微棠APP'}], 'rentCommodityType': [{'key': 10, 'value': '实物'}, {'key': 20, 'value': '服务'}, {'key': 30, 'value': '权益包'}], 'opportunityChannelType': [{'key': 0, 'value': '系统创建'}, {'key': 1, 'value': '销售创建'}, {'key': 2, 'value': '客服创建商机'}, {'key': 3, 'value': 'H5页面预约看房'}, {'key': 4, 'value': '用户在微棠App预约看房'}], 'ownerNewRoommateHouseStatus': [{'key': 0, 'value': '未签约'}, {'key': 1, 'value': '待确认'}, {'key': 2, 'value': '已签约'}], 'livingState': [{'key': 0, 'value': '未入住'}, {'key': 1, 'value': '已入住'}], 'thickType': [{'key': 2, 'value': '保洁'}, {'key': 3, 'value': '维修'}], 'idCardType': [{'key': 2, 'value': '身份证'}, {'key': 13, 'value': '护照'}, {'key': 14, 'value': '港澳居民来往内地通行证'}, {'key': 25, 'value': '台湾居民往来大陆通行证'}], 'minimumLeaseTerm': [{'key': 1, 'value': '1个月'}, {'key': 2, 'value': '2个月'}, {'key': 3, 'value': '3个月'}, {'key': 4, 'value': '4个月'}, {'key': 5, 'value': '5个月'}, {'key': 6, 'value': '6个月'}, {'key': 7, 'value': '7个月'}, {'key': 8, 'value': '8个月'}, {'key': 9, 'value': '9个月'}, {'key': 10, 'value': '10个月'}, {'key': 11, 'value': '11个月'}, {'key': 12, 'value': '12个月'}], 'projectThemeAreaStatus': [{'key': 0, 'value': '删除'}, {'key': 1, 'value': '发布'}, {'key': 2, 'value': '取消发布'}], 'violationType': [], 'leaveType': [{'key': 'annual_leave', 'value': '年假'}, {'key': 'sick_leave', 'value': '病假'}, {'key': 'compensatory_leave', 'value': '调休'}, {'key': 'maternity_paternity_leave', 'value': '产假/陪产假'}, {'key': 'funeral_leave', 'value': '丧假'}, {'key': 'marriage_leave', 'value': '婚假'}, {'key': 'matter_leave', 'value': '事假'}], 'messageInform': [{'key': 1, 'value': 'APP弹窗'}, {'key': 2, 'value': '移动推送消息'}, {'key': 3, 'value': '用户消息列表'}, {'key': 4, 'value': '微棠管理端弹窗'}, {'key': 5, 'value': '微棠管理端消息'}], 'paymentScene': [{'key': 'ali-withdraw', 'value': '支付宝（证书模式)'}, {'key': 'ali-pay', 'value': '支付宝(普通模式)'}, {'key': 'wx-pay', 'value': '微信支付'}], 'complaintType': [{'key': 1, 'value': '网络服务'}, {'key': 2, 'value': '财务打款'}, {'key': 3, 'value': '销售服务'}, {'key': 4, 'value': '保洁服务'}, {'key': 5, 'value': '客服服务'}, {'key': 6, 'value': '房屋质量'}, {'key': 7, 'value': '维修服务'}, {'key': 8, 'value': '邻里纠纷'}, {'key': 9, 'value': '其他类型'}], 'rtappMenuType': [{'key': 1, 'value': '未签约'}, {'key': 2, 'value': '已签约'}, {'key': 3, 'value': 'APP-底部菜单'}, {'key': 4, 'value': '生活-便民服务'}, {'key': 5, 'value': '我的-合同导航'}, {'key': 6, 'value': '我的-功能服务'}, {'key': 7, 'value': '我的-关于我们'}], 'billOrderStatus': [{'key': 10, 'value': '待支付'}, {'key': 41, 'value': '已支付'}, {'key': 40, 'value': '已取消'}], 'renewStatus': [{'key': 1, 'value': '续租待确认'}, {'key': 2, 'value': '确认续租'}, {'key': 3, 'value': '确认退租'}], 'rentResidentStatus': [{'key': 0, 'value': '全部'}, {'key': 1, 'value': '已注册'}, {'key': 2, 'value': '已认证'}, {'key': 3, 'value': '已预定'}, {'key': 4, 'value': '已签约'}, {'key': 5, 'value': '已入住'}], 'engineeringState': [{'key': 1, 'value': '已交付'}, {'key': 2, 'value': '退租配置中'}, {'key': 3, 'value': '维修中'}, {'key': 4, 'value': '配置中'}, {'key': 5, 'value': '验收中'}, {'key': 6, 'value': '开筹中'}], 'smartDeviceType': [{'key': 10, 'value': '智能门禁'}, {'key': 20, 'value': '智能门锁'}, {'key': 30, 'value': '智能水表'}, {'key': 40, 'value': '智能热水表'}, {'key': 50, 'value': '智能电表'}, {'key': 60, 'value': '智能燃气'}], 'feeCalculationType': [{'key': 1, 'value': '比例'}, {'key': 2, 'value': '固定值'}], 'shopRentContractFeeType': [{'key': 3, 'value': '管理费(元/月)'}, {'key': 6, 'value': '水费（元/吨）'}, {'key': 7, 'value': '电费（元/度）'}], 'marketingState': [{'key': 0, 'value': '下架'}, {'key': 1, 'value': '上架'}], 'assetsType': [{'key': 'asset_item', 'value': '资产项'}, {'key': 'smart_device', 'value': '智能设备'}], 'rentActivityClientType': [{'key': 1, 'value': '潜在客户'}, {'key': 2, 'value': '个人-签约人'}, {'key': 3, 'value': '个人-同住人'}, {'key': 4, 'value': '流失客户'}], 'eduLevel': [{'key': 5, 'value': '本科'}, {'key': 1, 'value': '小学'}, {'key': 2, 'value': '初中'}, {'key': 3, 'value': '高中'}, {'key': 9, 'value': '中专'}, {'key': 4, 'value': '大专'}, {'key': 6, 'value': '研究生'}, {'key': 7, 'value': '博士'}], 'modifiableState': [{'key': 'engineeringState', 'value': '工程状态'}, {'key': 'operationState', 'value': '运营状态'}, {'key': 'marketingState', 'value': '销售状态'}, {'key': 'climbState', 'value': '是否爬坡期'}, {'key': 'openState', 'value': '开业状态'}], 'applicableHouse': [{'key': 'unlimited', 'value': '不限'}], 'rentActivityDiscountBreakType': [{'key': 1, 'value': '全免'}, {'key': 2, 'value': '折扣'}, {'key': 3, 'value': '固定金额'}], 'dispatchMode': [{'key': 'auto', 'value': '自动'}, {'key': 'artificial', 'value': '人工'}], 'appAdvertType': [{'key': 10, 'value': '默认-启动广告'}, {'key': 11, 'value': '启动广告'}, {'key': 20, 'value': '默认-开锁广告'}, {'key': 21, 'value': '开锁广告'}], 'marriageType': [{'key': 1, 'value': '已婚'}, {'key': 2, 'value': '未婚'}, {'key': 4, 'value': '离异'}, {'key': 3, 'value': '保密'}, {'key': 5, 'value': '单身'}, {'key': 6, 'value': '恋爱中'}], 'manualCouponCxScene': [{'key': '101', 'value': '续租促销'}, {'key': '102', 'value': '沉没客户促销'}, {'key': '103', 'value': '友棠计划'}], 'paymentMethod': [{'key': '0', 'value': '不限'}, {'key': '1', 'value': '月付'}, {'key': '2', 'value': '季付'}, {'key': '3', 'value': '半年付'}, {'key': '4', 'value': '年付'}], 'rentActivityDiscountCycleType': [{'key': 1, 'value': '到合同期满'}, {'key': 2, 'value': '固定月份'}], 'rentMallCommodityPriceType': [{'key': 2, 'value': '线上价格'}, {'key': 4, 'value': '优惠价格'}], 'livingStatus': [{'key': 0, 'value': '搬离'}, {'key': 1, 'value': '在住'}], 'vtActivityType': [{'key': 'vt_official', 'value': '微棠官方活动'}, {'key': 'vt_association', 'value': '微棠社团'}, {'key': 'vt_project', 'value': '微棠项目'}], 'appSource': [{'key': 'vt-app', 'value': '微棠app'}, {'key': 'owner-app', 'value': '微棠业主app'}, {'key': 'rshop-app', 'value': '微棠商铺app'}], 'houseCycle': [{'key': 1, 'value': '爬坡超过'}, {'key': 2, 'value': '运营超过'}], 'dormContractReturnType': [{'key': 1, 'value': '提前退租'}, {'key': 2, 'value': '正常退租'}, {'key': 3, 'value': '弃租'}], 'reserveStatus': [{'key': 1, 'value': '上架'}, {'key': 2, 'value': '待签署协议'}, {'key': 3, 'value': '已预订'}, {'key': 4, 'value': '已取消'}, {'key': 5, 'value': '待签约'}, {'key': 8, 'value': '签约中'}, {'key': 6, 'value': '已签约'}, {'key': 7, 'value': '已过期'}, {'key': 9, 'value': '已作废'}, {'key': 0, 'value': '下架'}], 'dormStaffFeeType': [{'key': 1, 'value': '租金'}, {'key': 2, 'value': '押金'}, {'key': 3, 'value': '服务费'}, {'key': 4, 'value': '网络费'}, {'key': 6, 'value': '水费'}, {'key': 7, 'value': '电费'}], 'receivingOrdersMode': [{'key': 'robTickets', 'value': '抢单'}, {'key': 'selectOrder', 'value': '选择接单'}, {'key': 'mandatoryOrder', 'value': '强制接单'}, {'key': 'timeOutMandatoryOrder', 'value': '超时强制接单'}], 'rentActivityClientState': [{'key': 1, 'value': '在住超过'}, {'key': 2, 'value': '待退少于'}], 'orderStatus': [{'key': 1, 'value': '已下单'}, {'key': 2, 'value': '已取消'}, {'key': 3, 'value': '已受理'}, {'key': 4, 'value': '待评价'}, {'key': 5, 'value': '已完成'}], 'shopRentMerchantMallSell': [{'key': 'sell_1', 'value': '餐饮'}, {'key': 'sell_2', 'value': '轻餐饮'}, {'key': 'sell_3', 'value': '零售'}, {'key': 'sell_4', 'value': '配套'}, {'key': 'sell_5', 'value': '仓库'}], 'couponTemplateStatus': [{'key': 1, 'value': '未发布'}, {'key': 2, 'value': '已发布'}, {'key': 3, 'value': '核销中'}, {'key': 4, 'value': '已下架'}, {'key': 5, 'value': '已过期'}], 'lockState': [{'key': 0, 'value': '未锁定'}, {'key': 1, 'value': '已锁定'}], 'vtAssociationUserRole': [{'key': 1, 'value': '管理员'}, {'key': 2, 'value': '社员'}], 'storeStatus': [{'key': 1, 'value': '正常'}, {'key': 2, 'value': '暂停'}, {'key': 3, 'value': '关闭'}], 'manualCouponUseType': [{'key': 1, 'value': '促销'}, {'key': 2, 'value': '赠券'}, {'key': 3, 'value': '赔偿'}], 'withdrawalType': [{'key': 1, 'value': '正常退租'}, {'key': 2, 'value': '提前退租'}, {'key': 3, 'value': '清退'}, {'key': 4, 'value': '换租退租'}, {'key': 5, 'value': '作废'}, {'key': 6, 'value': '非退'}], 'rentActivityType': [{'key': 3, 'value': '推荐'}, {'key': 5, 'value': '签约'}, {'key': 6, 'value': '续租'}, {'key': 7, 'value': '换租'}, {'key': 12, 'value': '小程序引流'}], 'dormSettleType': [{'key': 1, 'value': '按入住情况'}, {'key': 2, 'value': '固定费用'}], 'shopStatus': [{'key': 1, 'value': '待出租'}, {'key': 5, 'value': '待激活'}, {'key': 4, 'value': '已签约'}, {'key': 6, 'value': '已挂起'}], 'taskType': [{'key': '1', 'value': '户内常规保洁工单'}, {'key': '2', 'value': '公区保洁工单'}, {'key': '3', 'value': '户内常规维修工单'}, {'key': '4', 'value': '公区维修工单'}, {'key': '5', 'value': '非住户投诉工单'}, {'key': '6', 'value': '退租工单'}, {'key': '7', 'value': '突发事件工单'}, {'key': '8', 'value': 'APP投诉咨询工单'}, {'key': '9', 'value': '增值服务商品购买工单'}, {'key': '10', 'value': 'APP户内维修工单'}, {'key': '11', 'value': '开门工单'}, {'key': '12', 'value': '退租保洁工单'}, {'key': '13', 'value': '退租维修工单'}, {'key': '14', 'value': '清退工单'}, {'key': '15', 'value': '建议工单'}, {'key': '16', 'value': '住户投诉工单'}, {'key': '17', 'value': '增值保洁工单'}, {'key': '18', 'value': '增值维修工单'}, {'key': '19', 'value': '住户违规工单'}, {'key': '20', 'value': '空房维修工单'}, {'key': '21', 'value': '空房保洁工单'}, {'key': '22', 'value': '入住保洁工单'}, {'key': '23', 'value': '专项保洁工单'}], 'channelSourceConsult': [{'key': 1, 'value': '400电话咨询'}, {'key': 2, 'value': '客户APP咨询'}, {'key': 3, 'value': '客户前台咨询'}, {'key': 7, 'value': '销售/小棠/物业等服务中心内部工作人员反馈'}, {'key': 8, 'value': '签约入住评价'}, {'key': 9, 'value': '中台各业务口反馈'}, {'key': 10, 'value': '客户调研反馈'}, {'key': 11, 'value': '拓展/公共关系/建设/财务等跨部门工作人员反馈'}, {'key': 12, 'value': '网格、街道办、派出所、消协、市监局等政府监管部门'}, {'key': 13, 'value': '微博、抖音、小红书、百度、豆瓣、闲鱼、知乎、西瓜视频等外网'}], 'scopeType': [{'key': 1, 'value': '房源'}], 'vtActivityStatus': [{'key': 1, 'value': '草稿'}, {'key': 2, 'value': '上架'}, {'key': 3, 'value': '下架'}], 'couponType': [{'key': 1, 'value': '代金券'}, {'key': 2, 'value': '折扣券'}], 'isGift': [{'key': 0, 'value': '否'}, {'key': 1, 'value': '是'}], 'paymentTypes': [{'key': 1, 'value': '合同'}, {'key': 2, 'value': '保洁'}, {'key': 3, 'value': '维修'}, {'key': 4, 'value': '水费'}, {'key': 5, 'value': '电费'}, {'key': 6, 'value': '网费'}, {'key': 7, 'value': '账户充值'}, {'key': 8, 'value': '商品'}, {'key': 9, 'value': '食堂'}, {'key': 10, 'value': '滞纳金'}, {'key': 11, 'value': '补充'}, {'key': 12, 'value': '预订金'}, {'key': 13, 'value': '燃气费'}, {'key': 14, 'value': '微棠格'}, {'key': 15, 'value': '服务费'}, {'key': 16, 'value': '增值配置'}, {'key': 17, 'value': '热水费'}], 'paymentStatus': [{'key': 0, 'value': '待支付'}, {'key': 1, 'value': '已支付'}, {'key': 2, 'value': '支付失败'}, {'key': 3, 'value': '已对账'}, {'key': 4, 'value': '已取消'}, {'key': 5, 'value': '超时未支付'}, {'key': 6, 'value': '部分退款'}, {'key': 7, 'value': '无需支付'}, {'key': 8, 'value': '已退款'}, {'key': 9, 'value': '支付中'}], 'dormCheckInType': [{'key': 11, 'value': '入住人'}, {'key': 12, 'value': '同住人'}], 'dormZbType': [{'key': 1, 'value': '企业占比'}, {'key': 2, 'value': '部门占比'}], 'launchStatus': [{'key': 1, 'value': '已上架'}, {'key': 2, 'value': '已下架'}, {'key': 3, 'value': '待完善'}], 'openState': [{'key': 0, 'value': '未开业'}, {'key': 1, 'value': '已开业'}], 'deviceFunctionIdentifyConstant': [{'key': 'SMART_METER_SWITCH_OFF', 'value': '智能水电表-拉闸'}, {'key': 'SMART_METER_SWITCH_ON', 'value': '智能水电表-合闸'}, {'key': 'SMART_METER_READING', 'value': '智能水电表-抄表'}], 'vtAssociationStatus': [{'key': 0, 'value': '移除'}, {'key': 1, 'value': '草稿'}, {'key': 2, 'value': '审核中'}, {'key': 3, 'value': '正常'}, {'key': 4, 'value': '解散'}, {'key': 5, 'value': '审核拒绝'}], 'citizenship': [{'key': 1, 'value': '中国籍（含港澳台地区）'}, {'key': 2, 'value': '非中国籍'}], 'priceState': [{'key': 0, 'value': '未定价'}, {'key': 1, 'value': '已定价'}], 'couponMutex': [{'key': 'no', 'value': '不限'}, {'key': 'type', 'value': '以往同类型'}, {'key': 'all', 'value': '以往所有'}], 'bannerRange': [{'key': 'enterprise', 'value': '企业级'}, {'key': 'project', 'value': '项目级'}], 'signState': [{'key': 0, 'value': '未签约'}, {'key': 1, 'value': '已签约'}], 'wordsComplaintUseType': [], 'applicableMonthType': [{'key': 0, 'value': '不限'}, {'key': 1, 'value': '固定月份'}], 'reserveState': [{'key': 0, 'value': '未预定'}, {'key': 1, 'value': '已预订'}], 'rentResidentType': [{'key': 0, 'value': '全部'}, {'key': 1, 'value': '签约人-个人'}, {'key': 3, 'value': '同住人-个人'}, {'key': 11, 'value': '主住户-企业'}, {'key': 12, 'value': '同住人-企业'}, {'key': 10, 'value': '潜在客户'}, {'key': 66, 'value': '临时入住'}, {'key': 13, 'value': '流失客户'}], 'enterpriseType': [{'key': 1, 'value': '企业'}, {'key': 2, 'value': '团队'}], 'bannerSkipType': [{'key': 1, 'value': '房屋商品详情'}, {'key': 2, 'value': '网页'}, {'key': 3, 'value': '文章'}], 'shopRentFlowPathState': [{'key': 1, 'value': '施工中'}, {'key': 2, 'value': '验收中'}, {'key': 3, 'value': '待租中'}, {'key': 4, 'value': '装修中'}, {'key': 5, 'value': '已开业'}, {'key': 6, 'value': '退租中'}], 'brokerStatus': [{'key': 1, 'value': '在职'}, {'key': 2, 'value': '离职'}], 'activityIssueChannel': [{'key': 'banner_house', 'value': '首页banner'}, {'key': 'banner_life', 'value': '生活banner'}, {'key': 'banner_community', 'value': '社区banner'}, {'key': 'channel_my-activity', 'value': '我的活动'}, {'key': 'channel_wechat-applets', 'value': '微信小程序'}, {'key': 'channel_vtown-manage', 'value': '微棠管理'}], 'itemConfigItemKey': [{'key': 'dispatchMode', 'value': '派单方式'}, {'key': 'receivingOrdersMode', 'value': '接单模式'}, {'key': 'latestCompletion', 'value': '最晚完成时间(单位分钟)'}, {'key': 'unattendedRemind', 'value': '无人接单提醒时间(单位分钟)'}, {'key': 'supportDraft', 'value': '支持草稿'}, {'key': 'chargebackMode', 'value': '支持退单'}, {'key': 'taskCallbackUrl', 'value': '回调地址'}, {'key': 'chargebackModeForm', 'value': '退单表单'}, {'key': 'finishProcessingForm', 'value': '完成处理表单'}, {'key': 'delayProcessing', 'value': '支持延时处理'}, {'key': 'delayProcessingForm', 'value': '延时处理表单'}, {'key': 'mainForm', 'value': '主表单'}, {'key': 'delayProcessingApprovalForm', 'value': '延时处理审批单'}], 'shopRentContractDepCycle': [{'key': 1, 'value': '1个月'}], 'selfUseStatus': [{'key': 1, 'value': '待退'}, {'key': 2, 'value': '欠费'}, {'key': 3, 'value': '逾期未退'}, {'key': 4, 'value': '退租配置中'}], 'dormContractSettleTimeType': [{'key': 1, 'value': '固定日期'}, {'key': 2, 'value': '月初第一天'}, {'key': 3, 'value': '月初第一周'}], 'couponPublishChannel': [{'key': 'resident', 'value': '客户端'}], 'issueCouponsFlag': [{'key': 0, 'value': '不发券'}, {'key': 1, 'value': '发券'}], 'messageTrait': [{'key': 1, 'value': '住户'}], 'activityType': [{'key': 2, 'value': '预售活动'}], 'couponsDateType': [{'key': 1, 'value': '固定的有效时间'}, {'key': 2, 'value': '领券再计算有效时间'}]}, 'bundle': None}
+test_web_sjkb_004 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>5</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_005</td>
+                    <td>/asset-api/v1/constant</td>
+                    <td>0.129s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '操作成功', 'data': {'LifeCyclePropertyOwnerType': [{'key': 1, 'value': '个人'}, {'key': 2, 'value': '单位'}], 'LifeCyclePropertyOwnerCertificateType': [{'key': 10, 'value': '个人身份证'}, {'key': 11, 'value': '个人港澳台证'}, {'key': 12, 'value': '个人护照'}, {'key': 13, 'value': '个人他国身份证'}, {'key': 14, 'value': '个人其他'}, {'key': 20, 'value': '单位社会信用代码证'}, {'key': 24, 'value': '单位部队证件'}, {'key': 25, 'value': '单位其他'}], 'excelSpaceType': [{'key': 301, 'value': '公寓房间'}, {'key': 291, 'value': '公寓公区'}, {'key': 292, 'value': '共享公区'}, {'key': 302, 'value': '管理用房'}, {'key': 303, 'value': '业主用房'}, {'key': 33, 'value': '商铺'}, {'key': 37, 'value': '公共空间'}, {'key': 31, 'value': '房间'}], 'todoTypeRecord': [{'key': 1, 'value': '验楼申请'}, {'key': 2, 'value': '验楼结果'}, {'key': 3, 'value': '资产验收'}, {'key': 4, 'value': '工程验收'}, {'key': 5, 'value': '消防验收'}, {'key': 6, 'value': '楼栋数据审核'}], 'repairItemType': [{'key': 1, 'value': '管道疏通'}, {'key': 2, 'value': '网络宽带'}, {'key': 3, 'value': '紧急抢修'}, {'key': 4, 'value': '灯具照明'}, {'key': 5, 'value': '开关插座'}, {'key': 6, 'value': '地面维修'}, {'key': 7, 'value': '电器维修'}, {'key': 8, 'value': '家具软饰'}, {'key': 9, 'value': '门窗护栏'}, {'key': 10, 'value': '墙面天花'}, {'key': 11, 'value': '卫浴洁具'}, {'key': 12, 'value': '其他'}], 'todoType': [{'key': 'buildingDataReview', 'value': '楼栋数据审核'}, {'key': 'acceptanceApply', 'value': '验楼申请'}, {'key': 'acceptanceResult', 'value': '验楼结果'}], 'repairItemDescriptionType': [{'key': 1, 'value': '故障描述'}, {'key': 2, 'value': '维修描述'}], 'assettagbooleanrelation': [{'key': 1, 'value': '且'}, {'key': 2, 'value': '或'}], 'LifeCycleBuildingPropertyType': [{'key': 1, 'value': '集中产权'}, {'key': 2, 'value': '分户产权'}], 'spaceType': [{'key': 301, 'value': '公寓房间'}, {'key': 302, 'value': '管理用房'}, {'key': 303, 'value': '业主用房'}, {'key': 291, 'value': '公寓公区'}, {'key': 292, 'value': '共享公区'}, {'key': 33, 'value': '商铺'}, {'key': 37, 'value': '公共空间'}, {'key': 304, 'value': '宿舍'}, {'key': 80, 'value': '宿舍房间'}, {'key': 32, 'value': '床位'}], 'excelSpaceTypeBase': [{'key': 301, 'value': '公寓房间'}, {'key': 291, 'value': '公寓公区'}, {'key': 292, 'value': '共享公区'}, {'key': 302, 'value': '管理用房'}, {'key': 303, 'value': '业主用房'}, {'key': 33, 'value': '商铺'}, {'key': 37, 'value': '公共空间'}, {'key': 304, 'value': '宿舍'}], 'LifeCycleStorageType': [{'key': 1, 'value': '收储房源（租赁）'}, {'key': 2, 'value': '委托运营房源'}, {'key': 3, 'value': '收储房源（购买）'}], 'spaceListType': [{'key': 25, 'value': '楼栋'}, {'key': 301, 'value': '公寓房间'}, {'key': 302, 'value': '管理用房'}, {'key': 303, 'value': '业主用房'}, {'key': 291, 'value': '公寓公区'}, {'key': 292, 'value': '共享公区'}, {'key': 33, 'value': '商铺'}, {'key': 37, 'value': '公共空间'}], 'acceptanceStatus': [{'key': 3, 'value': '待清空'}, {'key': 4, 'value': '已清空'}, {'key': 5, 'value': '已备案'}, {'key': 0, 'value': '待验收'}, {'key': 2, 'value': '验收中'}, {'key': 1, 'value': '已验收'}], 'currencyCatalog': [{'key': 'VALUE_ADDED_CONFIGURATION', 'value': '增值配置类'}, {'key': 'WALL_AND_CEILING', 'value': '墙面天花类'}, {'key': 'GOODS_CLEARING_AND_TRANSPORTATION', 'value': '大件物品清运类'}], 'SpaceOrientation': [{'key': 1, 'value': '东'}, {'key': 2, 'value': '南'}, {'key': 3, 'value': '西'}, {'key': 4, 'value': '北'}, {'key': 5, 'value': '南北'}], 'assettagemapping': [{'key': 1, 'value': '房间配置'}, {'key': 2, 'value': '厨房配置'}, {'key': 3, 'value': '卫生间配置'}, {'key': 4, 'value': '面积'}], 'LifeCyclePropertyType': [{'key': 1, 'value': '其他'}, {'key': 2, 'value': '房地产证'}, {'key': 3, 'value': '不动产权证'}, {'key': 4, 'value': '城中村房屋权属证明'}, {'key': 5, 'value': '土地使用权出让合同书、建设工程规划许可证和建设工程竣工验收备案证明'}], 'houseBizStatusType': [{'key': 0, 'value': '未核验'}, {'key': 1, 'value': '已核验'}, {'key': 2, 'value': '核验中'}], 'LifeCycleSignModel': [{'key': 1, 'value': '云贷模式'}, {'key': 2, 'value': '传统模式'}], 'assettagrelation': [{'key': '1', 'value': '有'}, {'key': '2', 'value': '无'}]}, 'bundle': None}
+test_web_sjkb_005 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>6</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_006</td>
+                    <td>通知-跳转类型jumptype</td>
+                    <td>0.0298s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '操作成功', 'data': [{'key': 1, 'value': '内容'}, {'key': 2, 'value': '链接'}, {'key': 3, 'value': '无跳转'}], 'bundle': None}
+test_web_sjkb_006 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>7</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_007</td>
+                    <td>通知类型list</td>
+                    <td>0.0526s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '操作成功', 'data': {'total': 2, 'rows': [{'primaryKey': '4e958cb823744fee995c87f20c488311', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'project', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'title': '因最近疫情防控形势有所升级，根据疫情防控', 'description': '22', 'backgroundColorType': '', 'backgroundColor': '', 'coverUrl': '', 'content': '<p>因最近疫情防控形势有所升级，根据疫情防控需要，坂田社区开展新一轮区域核酸筛查检测，坂田辖区的居民务必在今后三天（7月21日—23日）完成每天一次核酸检测，请大家到就近核酸检测点检测一次核酸，这段时间保持一天一测，做到应检尽检，不漏一人。为了迅速切断传播链，也为了您和广大人民群众的健康安全，请大家积极配合，根据自己的时间有序到就近核酸检测点检测核酸！</p>', 'createUser': '72e9d5d49c4146ebbb26d87fe3004799', 'createTime': 1658456070000, 'updateUser': '1caa71c0e53b4b62a69da3f4d79f3502', 'updateTime': 1658734819000, 'templateStatus': 1, 'status': 1, 'categoryName': '核酸', 'parentCategoryName': '通知', 'categoryDesc': '通知 | 核酸'}, {'primaryKey': '2ed69f420b22476a93440ac38648917d', 'bizId': 'cc27b35adfd246cfa7acb00ff890c2dc', 'bizType': 'project', 'categoryId': '0ad6bda06977427fb953cdb34f72322c', 'categoryPath': '259141bbef0c41058be2f1760f7827a6,0ad6bda06977427fb953cdb34f72322c', 'title': '核酸公告模板', 'description': '此乃核酸公告模板', 'backgroundColorType': '', 'backgroundColor': '', 'coverUrl': '', 'content': '<p>13123113</p>', 'createUser': '8ca3590d4fe54de083eb31f6e576aba6', 'createTime': 1658194214000, 'updateUser': '8ca3590d4fe54de083eb31f6e576aba6', 'updateTime': 1658194273000, 'templateStatus': 1, 'status': 1, 'categoryName': '核酸', 'parentCategoryName': '通知', 'categoryDesc': '通知 | 核酸'}]}, 'bundle': None}
+test_web_sjkb_007 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>8</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_008</td>
+                    <td>新增通知公告new</td>
+                    <td>0.0716s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'code': '200', 'success': True, 'key': None, 'message': 'ok', 'extend': {}}
+test_web_sjkb_008 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>9</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_009</td>
+                    <td>发布公告publish</td>
+                    <td>0.0648s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '更新成功', 'data': {'code': '200', 'success': True, 'key': '0cfa39560e2b4a3aa0c4577d6043cd90', 'message': '更新成功', 'extend': {}}, 'bundle': None}
+test_web_sjkb_009 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>10</td>
+                    <td class="Web_sjkb_all">Web_sjkb_all</td>
+                    <td>test_web_sjkb_010</td>
+                    <td>取消发布公告cancelPublish</td>
+                    <td>0.0898s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>{'success': True, 'code': '200', 'message': '更新成功', 'data': {'code': '200', 'success': True, 'key': '0cfa39560e2b4a3aa0c4577d6043cd90', 'message': '更新成功', 'extend': {}}, 'bundle': None}
+test_web_sjkb_010 (test_web_sjkb.Web_sjkb_all)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 200px"></div>
+</div>
+
+
+<script>
+    var tbodyTr = $('tbody tr');
+    var testResult = $("#testResult");
+    var testClass = $("#testClass");
+    <!--    用例执行详细信息显示切换-->
+    $(".btn_info").click(function () {
+        $(this).parent().parent().next().toggle();
+
+    });
+    // 当选择用例类之后触发
+    testClass.change(function () {
+        var cls = $(this).val();
+        var res = testResult.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+    testResult.change(function () {
+        var res = $(this).val();
+        var cls = testClass.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+
+    function elementDisplay(cls, res) {
+        // 用例数据的显示
+        if (cls === "所有") {
+            if (res === "所有") {
+                tbodyTr.has('button').show();
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-success').show()
+
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-warning').show()
+
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-danger').show()
+
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-info').show()
+            }
+        } else {
+            if (res === "所有") {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').show()
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
+            }
+        }
+    }
+
+    function sort() {
+        //重新排列显示序号
+        // 选择所有可以见的tr
+        var visibleTr = tbodyTr.filter(":visible");
+
+        visibleTr.each(function (index, element) {
+            element.firstElementChild.innerHTML = index + 1;
+
+        })
+
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('char'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+    // 指定图表的配置项和数据
+    option = {
+        color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['通过', '失败', '错误', '跳过']
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 10, name: '通过'},
+                    {value: 0, name: '失败'},
+                    {value: 0, name: '错误'},
+                    {value: 0, name: '跳过'}
+                ]
+            }
+        ]
+    };
+    option2 = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'gauge',
+                detail: {formatter: '100.00%'},
+                data: [{value: '100.00', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
+            }
+        ]
+    };
+
+
+    myChart2.setOption(option2);
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+</body>
+</html>
